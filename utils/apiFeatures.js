@@ -39,11 +39,11 @@ class APIfeatures {
     return this;
   }
   paginate() {
-    const page = +this.query.page || 1; // Initializing the page and setting it to 1 or the defined from req.query
-    const limit = +this.query.limit || 100; // by default the API will send only 100 objects
+    const page = this.queryString.page * 1 || 1; // Initializing the page and setting it to 1 or the defined from req.query
+    const limit = this.queryString.limit * 1 || 100; // by default the API will send only 100 objects
     // page - one because it is the content for the next page that is being requested
     const skip = (page - 1) * limit;
-    this.query = this.query.skip(page).limit(limit);
+    this.query = this.query.skip(skip).limit(limit);
     return this;
   }
 }
